@@ -29,7 +29,7 @@
 |Colum|Type|Options|
 |-----|----|-------|
 |name|text|null: false
-|e-mail|varchar|null: false, unique: true|
+|e-mail|string|null: false, unique: true|
 
 
 ### Association
