@@ -41,11 +41,12 @@
 |Colum|Type|Options|
 |-----|----|-------|
 |user_id|integer|null: false, foreign: key|
-|name|text|null:false, 
+|name|string|null:false, 
 
 ### Association
 - has_many :users
-- has_many :messages
+- has_many :messages, through: :member
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
