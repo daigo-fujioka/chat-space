@@ -41,10 +41,11 @@
 |Colum|Type|Options|
 |-----|----|-------|
 |user_id|integer|null: false, foreign: key|
+|group_name|text|null:false, 
 
 ### Association
 - has_many :users
-
+- 
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
