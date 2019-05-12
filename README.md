@@ -34,7 +34,7 @@
 
 ### Association
 - has_many :messages
-- has_many :groups
+- has_many :groups, through: :member
 
 ##groupsテーブル
 
@@ -44,8 +44,9 @@
 |name|string|null:false, 
 
 ### Association
-- has_many :users
-- has_many :messages, through: :member
+- has_many :users, through: :member
+- has_many :messages
+
 
 
 This README would normally document whatever steps are necessary to get the
