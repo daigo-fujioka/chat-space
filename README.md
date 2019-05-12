@@ -44,6 +44,6 @@
 |name|string|null:false|
 
 ### Association
-- has_many :users, through: :member
+- has_many :users, through: :members
 - has_many :messages
 - has_many :members
