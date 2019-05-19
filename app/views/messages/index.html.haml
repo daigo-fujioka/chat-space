@@ -20,23 +20,8 @@
             .main-header__edit-btn 
               Edit
         .messages
-          .message
-            .upper-info
-              %p.upper-info__user
-                tarou
-              %p.upper-info__date
-                2019/05/13(Sun) 11:33:20
-            %p.text
-              Hello world!
-          .message
-            .upper-info
-              %p.upper-info__user
-                yosiko
-              %p.upper-info__date
-                2019/05/13(Sun) 11:34:20
-            %p.text
-              Good bye world!
-        .form
+          = render @messages
+          .form
           = form_for [@group, @message] do |f|
             = f.text_field :content, class: 'form__message', placeholder: 'type a message'
             .form__mask
