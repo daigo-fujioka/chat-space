@@ -37,12 +37,12 @@
             %p.text
               Good bye world!
         .form
-          %form.new-message
-            %input{type:"hidden"}
-            %input{type:"hidden"}
-            .input-box
-              %input{class:"input-box__text", type:"text", placeholder:"type a message"}
-              %label{class:"image-label", for:"message-image"}
+          = form_for [@group, @message] do |f|
+            = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+            .form__mask
+              = f.label :image, class: 'form__mask__image' do
                 %i.far.fa-image
-                %input{class:"image-label__input", type:"file", id:"message-image"}
-            %input{class:"new-message__submit-btn", type:"submit", value:"Send"}
+                = f.file_field :image, class: 'hidden'
+            = f.submit 'Send', class: 'form__submit'
+                
+               
