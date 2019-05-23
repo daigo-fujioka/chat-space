@@ -9,25 +9,24 @@
         .main-header
           .current-group
             %h2.current-group__name
-              sample
+              = @group.name
             %ul.member-list
-              Member:
-              %li.member-list__member
-                tarou
-              %li.member-list__member
-                yosiko
-          %a{href:""}
+              Member
+              %li
+                = @users.pluck(:name).join(".")
             .main-header__edit-btn 
               Edit
         .messages
           = render @messages
-          .form
+        .form
           = form_for [@group, @message] do |f|
-            = f.text_field :content, class: 'form__message', placeholder: 'type a message'
-            .form__mask
-              = f.label :image, class: 'form__mask__image' do
+            .input-box
+              = f.text_field :content, class: 'input-box__text', placeholder: 'type a message'
+              = f.label :image, class: 'image-label' do
                 %i.far.fa-image
-                = f.file_field :image, class: 'hidden'
-            = f.submit 'Send', class: 'form__submit'
+                = f.file_field :image, class: 'image-label__input'
+            = f.submit 'Send', class: 'new-message__submit-btn'
+      
+
+                  
                 
-               
