@@ -33,9 +33,9 @@ $(function(){
         })
         .done(function(data){
             var html = buildHTML(data);
-            $('.messages').append(html)
-            $('.input-box__text').val('')
-            $('.new-message__submit-btn').attr('disabled',false)
+            $('.messages').append(html);
+            $('.new_message')[0].reset();
+            $('.new-message__submit-btn').attr('disabled',false);
         })
         .fail(function(){
             alert('error')
