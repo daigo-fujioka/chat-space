@@ -52,7 +52,7 @@ describe MessagesController do
             end
             it 'redirects to group_messages_path' do
               subject
-              expect(response).to redirect_to(group_messages_path(group))
+              expet(response).to redirect_to(group_messages_path(group))
           end
         end
 
