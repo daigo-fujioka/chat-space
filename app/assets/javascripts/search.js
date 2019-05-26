@@ -9,8 +9,8 @@ $(function(){
         result.append(html)
     }
 
-    function appendErrMsgToHTML(msg){
-        var html = `<p>${ msg }</p>`
+    function appendErrMsgToHTML(){
+        var html = `<p>一致するユーザーはいません</p>`
         result.append(html)
     }
     $("#user-search-field").on("keyup", function(){
@@ -31,7 +31,7 @@ $(function(){
              });
          }
          else {
-             appendErrMsgToHTML("一致するユーザーはいません");
+             appendErrMsgToHTML();
          }
         if (input.length == 0){
             $("#user-search-result").empty();
