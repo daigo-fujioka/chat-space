@@ -59,6 +59,13 @@
     .chat-group-form__field--right {
       float: right;
       width: 70%;
+      .chat-group-form__search clearfix{
+         &:after {
+          content: "";
+          clear: both;
+          display: block;
+        }
+      }
     }
 
     .chat-group-form__label {
