@@ -1,7 +1,7 @@
 $(function(){
     function buildHTML(message){
         var img = message.image?  `<img src= ${ message.image }>` : "" ;
-        var html = `<div class="message">
+        var html = `<div class="message" data-message_id="${message.id}">
                     <div class="upper-info">
                     <div class="upper-info__user">
                         ${ message.name }
@@ -18,7 +18,7 @@ $(function(){
                     </div>
                 </div>`
             return html
-    }
+    };
     $('.new_message').on('submit', function(e){
         e.preventDefault();
         var formData = new FormData(this); 
@@ -36,15 +36,64 @@ $(function(){
             $('.messages').append(html);
             $('.new_message')[0].reset();
             $('.new-message__submit-btn').attr('disabled',false);
+            $('.messages').animate({scrollTop: $('.messages') [0].scrollHeight}, 500, 'swing');
         })
         .fail(function(){
             alert('error')
         })
     });
+
+    var buildMessageHTML = function(message) {
+      var content = message.content? `<p class="lower-message__content">${message.content}</p>` : "" ;
+      var img = message.image?  `<img src= ${ message.image }>` : "" ;
+            var html = `<div class= "message" data-message_id= "${message.id}" 
+               <div class="upper-info">
+                  <div class="upper-info__user">
+                    ${message.name}
+                  </div>
+                  <div class="upper-info__date"
+                    ${message.created_at}
+                  </div>
+               </div>
+               <div class="lower-message">
+                 ${content}
+                 ${img}
+               </div>
+            </div>`
+        return html;
+    };
+
+    var reloadMessages = function(){
+       var path = location.pathname
+       var pathinfo = path.split('/')
+       var pathtrue = pathinfo[pathinfo.length-2];
+       last_message_id = $(".message:last").data('message_id');
+       $.ajax({
+           url:`/groups/${pathtrue}/api/messages`,
+           type: 'get',
+           dataType: 'json',
+           data: {id: last_message_id}
+       })
+       .done(function(messages){
+           var insertHTML = '';
+           messages.forEach (function(message){
+             if (last_message_id < message.id){
+              insertHTML += buildMessageHTML(message);
+              $('.messages').append(insertHTML);
+              $('.messages').animate({scrollTop: $('.messages') [0].scrollHeight}, 500, 'swing');
+             }
+          });
+      })
+      .fail(function(){
+          alert('error');
+      })
+    
+    }; 
+   
+    if (document.URL.match("/messages")){
+      setInterval(reloadMessages, 5000); 
+     } 
 });
 
-$(function(){
-    $('.new_message').on('submit', function(e){
-        $('.messages').animate({scrollTop: $('.messages') [0].scrollHeight}, 500, 'swing');
-    });
-});
+
+    
