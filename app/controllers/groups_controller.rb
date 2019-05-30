@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
 
     def new
        @group = Group.new
-       @group.users << current_user
+       @group.users<< current_user
     end
 
     def create
@@ -17,7 +17,9 @@ class GroupsController < ApplicationController
            render :new
         end
     end
-
+    def edit
+        @users= @group.users.where.not(id: current_user.id)
+    end
 
     def update
         if @group.update(group_params)
