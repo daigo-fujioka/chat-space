@@ -1,7 +1,7 @@
 $(function(){
     function buildHTML(message){
         var img = message.image?  `<img src= ${ message.image }>` : "" ;
-        var html = `<div class="message" data-message_id="${message.id}">
+        var html = `<div class="message" data-message-id="${message.id}">
                     <div class="upper-info">
                     <div class="upper-info__user">
                         ${ message.name }
@@ -46,12 +46,12 @@ $(function(){
     var buildMessageHTML = function(message) {
       var content = message.content? `<p class="lower-message__content">${message.content}</p>` : "" ;
       var img = message.image?  `<img src= ${ message.image }>` : "" ;
-            var html = `<div class= "message" data-message_id= "${message.id}" 
+            var html = `<div class= "message" data-message-id= "${message.id}"> 
                <div class="upper-info">
                   <div class="upper-info__user">
                     ${message.name}
                   </div>
-                  <div class="upper-info__date"
+                  <div class="upper-info__date">
                     ${message.created_at}
                   </div>
                </div>
@@ -67,7 +67,8 @@ $(function(){
        var path = location.pathname
        var pathinfo = path.split('/')
        var pathtrue = pathinfo[pathinfo.length-2];
-       last_message_id = $(".message:last").data('message_id');
+       var last_message_id = $('.message').last().data('message-id');
+       console.log(last_message_id)
        $.ajax({
            url:`/groups/${pathtrue}/api/messages`,
            type: 'get',
@@ -75,6 +76,7 @@ $(function(){
            data: {id: last_message_id}
        })
        .done(function(messages){
+           console.log(messages)
            var insertHTML = '';
            messages.forEach (function(message){
              if (last_message_id < message.id){
@@ -93,8 +95,7 @@ $(function(){
     if (document.URL.match("/messages")){
       setInterval(reloadMessages, 5000); 
      } 
-    
-});
+  });
 
 
     
