@@ -93,6 +93,7 @@ $(function(){
     if (document.URL.match("/messages")){
       setInterval(reloadMessages, 5000); 
      } 
+    
 });
 
 
